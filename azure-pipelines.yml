@@ -53,8 +53,16 @@ stages:
               manifests: |
                 $(Pipeline.Workspace)/k8s/service.yml
                 $(Pipeline.Workspace)/k8s/ingress.yml
-              
+                $(Pipeline.Workspace)/k8s/deployment.yml
               containers: '$(containerRegistry)/$(imageRepository):$(tag)'
-          
-
-          
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Kubernetes Service Connection'
+              kubernetesServiceEndpoint: 'kubernetes-connection'
+              command: 'apply'
+              useConfigurationFile: true
+              configuration: 'k8s/deployment-prod.yml'
+              secretType: 'dockerRegistry'
+              containerRegistryType: 'Azure Container Registry'
+              azureContainerRegistry: 'containerregistry555.azurecr.io'
+              secretName: 'secret.yml'
