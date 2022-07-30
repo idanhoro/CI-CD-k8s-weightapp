@@ -35,6 +35,8 @@ stages:
   jobs:
   - deployment: Deploy
     displayName: 'Deploy to AKS'
+    pool:
+      name: "CI-agents"
     environment: 'staging.default'
     strategy:
       runOnce: 
