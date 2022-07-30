@@ -56,7 +56,7 @@ stages:
                 $(Pipeline.Workspace)/k8s/service.yml
                 $(Pipeline.Workspace)/k8s/ingress.yml
                 $(Pipeline.Workspace)/k8s/deployment.yml
-              containers: '$(containerRegistry)/$(imageRepository):$(Build.BuildId)'
+              containers: 'containerregistry555.azurecr.io/weighttrackerapp:$(Build.BuildId)'
           - task: Kubernetes@1
             inputs:
               connectionType: 'Kubernetes Service Connection'
