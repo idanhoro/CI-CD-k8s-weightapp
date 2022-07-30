@@ -1,19 +1,19 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: weightTrackerApp 
+  name: weight-tracker-app 
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: weightTrackerApp
+      app: weight-tracker-app
   template:
     metadata:
       labels:
-        app: weightTrackerApp 
+        app: weight-tracker-app 
     spec:
       containers:
-        - name: weightTrackerApp 
+        - name: weight-tracker-app 
           image: containerregistry555.azurecr.io/weighttrackerapp
           imagePullPolicy: "Always"
           ports:
