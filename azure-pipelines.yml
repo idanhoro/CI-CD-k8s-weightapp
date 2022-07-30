@@ -7,7 +7,7 @@ trigger:
 resources:
 - repo: self
 
-# Continuous Integration Process..
+# Continuous Integration Process.
 stages:
 - stage: Build
   displayName: Install Docker-Build and push stage
