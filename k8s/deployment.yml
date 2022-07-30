@@ -1,0 +1,23 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: weightTrackerApp 
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: weightTrackerApp
+  template:
+    metadata:
+      labels:
+        app: weightTrackerApp 
+    spec:
+      containers:
+        - name: weightTrackerApp 
+          image: containerregistry555.azurecr.io/weighttrackerapp
+          imagePullPolicy: "Always"
+          ports:
+          - containerPort: 8080
+          envFrom:
+          - secretRef:
+             name: secret.yml
