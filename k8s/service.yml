@@ -3,7 +3,10 @@ kind: Service
 metadata:
     name: weight-tracker-app
 spec:
+    type: ClusterIP
     ports:
-    - port: 80 
+     - protocol: TCP 
+       port: 80
+       targetPort: 8080
     selector:
         app: weight-tracker-app
