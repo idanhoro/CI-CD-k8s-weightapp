@@ -1,0 +1,26 @@
+name: BootcampDockerCICD
+
+trigger:
+- master
+- feature/*
+
+resources:
+- repo: self
+
+# Continuous Integration Process.
+stages:
+- stage: Build
+  displayName: Install Docker-Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      name: "CI-agents"
+    steps:
+    - task: Docker@2
+      displayName: Build and push image
+      inputs:
+        containerRegistry: 'weight-app-connection'
+        repository: 'weightapp'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
