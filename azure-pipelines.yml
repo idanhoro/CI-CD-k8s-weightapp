@@ -24,13 +24,13 @@ stages:
         repository: 'WeightTrackerApp'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-
+        
     - upload: k8s
       artifact: k8s
     
   
 - stage: Deploy
-  displayName: Deploy to Production
+  displayName: Deploy to Staging
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   variables:
     - group: "Staging-variables"
@@ -72,6 +72,7 @@ stages:
                 $(Pipeline.Workspace)/k8s/deployment.yml
               containers: 'containerregistry555.azurecr.io/weighttrackerapp:$(Build.BuildId)'
           - task: Kubernetes@1
+            displayName: 'Apply database yml'
             inputs:
               connectionType: 'Kubernetes Service Connection'
               kubernetesServiceEndpoint: 'kubernetes-connection'
@@ -81,6 +82,7 @@ stages:
               secretType: 'generic'            
               secretName: 'db-secret.yml'
           - task: Kubernetes@1
+            displayName: 'Apply deployment yml'
             inputs:
               connectionType: 'Kubernetes Service Connection'
               kubernetesServiceEndpoint: 'kubernetes-connection'
