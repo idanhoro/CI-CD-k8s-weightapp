@@ -44,4 +44,4 @@ stages:
       runOnce: 
         deploy:
           steps:
-            - template: $(Pipeline.Workspace)/templates/kubernetes-cd-template.yml
+            - template: $(Pipeline.Workspace)/templates/kubernetes-cd-template.yaml
