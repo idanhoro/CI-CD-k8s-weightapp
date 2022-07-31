@@ -44,4 +44,4 @@ stages:
       runOnce: 
         deploy:
           steps:
-          - template: templates/kubernetes-cd-template.yml
+            - template: templates/kubernetes-cd-template.yml
