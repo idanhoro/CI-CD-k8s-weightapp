@@ -63,6 +63,7 @@ stages:
               manifests: |
                 $(Pipeline.Workspace)/k8s/service.yml
                 $(Pipeline.Workspace)/k8s/ingress.yml
+                $(Pipeline.Workspace)/k8s/database.yml
                 $(Pipeline.Workspace)/k8s/deployment.yml
               containers: 'containerregistry555.azurecr.io/weighttrackerapp:$(Build.BuildId)'
           - task: Kubernetes@1
