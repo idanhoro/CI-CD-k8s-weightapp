@@ -43,6 +43,8 @@ stages:
     environment: 'staging.default'
     variables:
       - group: "Staging-variables"
+      - name: k8s_conn
+        value: :'kubernetes-staging-connection'
     strategy:
       runOnce:
         deploy:
