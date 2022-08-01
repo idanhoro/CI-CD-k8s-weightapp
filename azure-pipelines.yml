@@ -7,6 +7,9 @@ trigger:
 resources:
 - repo: self
 
+variables:
+  k8s_conn: 'kubernetes-staging-connection'
+
 # Continuous Integration Process..
 stages:
 - stage: Build
@@ -44,10 +47,6 @@ stages:
       runOnce:
         deploy:
          steps:
-          # Create a variable
-          # Note that this does not update the environment of the current script.
-          - bash: |
-              echo "##vso[task.setvariable variable=k8s_conn]kubernetes-staging-connection"
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
