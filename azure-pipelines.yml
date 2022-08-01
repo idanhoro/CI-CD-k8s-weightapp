@@ -7,9 +7,6 @@ trigger:
 resources:
 - repo: self
 
-variables:
-  k8s_conn: 'kubernetes-staging-connection'
-
 # Continuous Integration Process.
 stages:
 - stage: Build
