@@ -1,4 +1,7 @@
          steps:
+          - task: CmdLine@2
+            inputs:
+              script: 'template=`cat "templates/kubernetes-cd-template.yaml" | sed "s/{{k8s_conn}}/$k8s_conn/g"`'
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
