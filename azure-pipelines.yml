@@ -37,7 +37,7 @@ stages:
     displayName: Deploy to staging
     pool:
       name: "CI-agents"
-    environment: 'staging.default'
+    environment: 'production.default'
     variables:
       - group: "Staging-variables"
     strategy:
