@@ -43,6 +43,8 @@ stages:
     environment: 'staging.default'
     variables:
       - group: "Staging-variables"
+      - name: k8s_conn
+        value: staging-WeightTracker-default-1659376129080
     strategy:
       runOnce:
         deploy:
@@ -51,7 +53,7 @@ stages:
             displayName: Create imagePullSecret
             inputs:
               action: 'createSecret'
-              kubernetesServiceConnection: 'staging-WeightTracker-default-1659376129080'
+              kubernetesServiceConnection: '$(k8s_conn)'
               secretType: 'generic'
               secretName: 'secret.yml'
               secretArguments: '--from-literal=COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) --from-literal=HOST=$(HOST) --from-literal=PORT=$(PORT) --from-literal=NODE_ENV=$(NODE_ENV) --from-literal=HOST_URL=$(HOST_URL) --from-literal=OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) --from-literal=OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) --from-literal=OKTA_ORG_URL=$(OKTA_ORG_URL)  --from-literal=PGHOST=$(PGHOST) --from-literal=PGUSERNAME=$(PGUSERNAME) --from-literal=PGDATABASE=$(PGDATABASE) --from-literal=PGPASSWORD=$(PGPASSWORD)  --from-literal=PGPORT=$(PGPORT)'
@@ -59,7 +61,7 @@ stages:
             displayName: 'Create secret for Database'
             inputs:
               action: 'createSecret'
-              kubernetesServiceConnection: 'staging-WeightTracker-default-1659376129080'
+              kubernetesServiceConnection: '$(k8s_conn)'
               secretType: 'generic'
               secretName: 'db-secret.yml'
               secretArguments: '--from-literal=PGUSERNAME=$(PGUSERNAME) --from-literal=POSTGRES_PASSWORD=$(PGPASSWORD)'
@@ -77,7 +79,7 @@ stages:
           - task: Kubernetes@1
             inputs:
               connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceEndpoint: 'staging-WeightTracker-default-1659376129080'
+              kubernetesServiceEndpoint: '$(k8s_conn)'
               command: 'apply'
               useConfigurationFile: true
               configuration: 'k8s/database.yml'
@@ -86,7 +88,7 @@ stages:
           - task: Kubernetes@1
             inputs:
               connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceEndpoint: 'staging-WeightTracker-default-1659376129080'
+              kubernetesServiceEndpoint: '$(k8s_conn)'
               command: 'apply'
               useConfigurationFile: true
               configuration: 'k8s/deployment.yml'
