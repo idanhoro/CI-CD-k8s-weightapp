@@ -32,14 +32,14 @@ stages:
 - stage: DeployStaging
   displayName: Deploy to staging
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-  variables:
-    - group: "Staging-variables"
   jobs:
   - deployment: Deploy
     displayName: 'Deploy to AKS'
     pool:
       name: "CI-agents"
     environment: 'staging.default'
+    variables:
+      - group: "Staging-variables"
     strategy:
       runOnce: 
         deploy:
