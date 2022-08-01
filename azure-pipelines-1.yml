@@ -7,6 +7,11 @@ trigger:
 resources:
 - repo: self
 
+parameters:
+- name: k8s_conn # name of the parameter; required
+  type: string # data type of the parameter; required
+  default: 'staging-WeightTracker-default-1659376582608'
+
 # Continuous Integration Process..
 stages:
 - stage: Build
