@@ -49,4 +49,48 @@ stages:
       runOnce:
         deploy:
          steps:
-           - template: templates/kubernetes-cd-template.yaml
+          - task: KubernetesManifest@0
+            displayName: Create imagePullSecret
+            inputs:
+              action: 'createSecret'
+              kubernetesServiceConnection: '$(k8s_conn)'
+              secretType: 'generic'
+              secretName: 'secret.yml'
+              secretArguments: '--from-literal=COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) --from-literal=HOST=$(HOST) --from-literal=PORT=$(PORT) --from-literal=NODE_ENV=$(NODE_ENV) --from-literal=HOST_URL=$(HOST_URL) --from-literal=OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) --from-literal=OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) --from-literal=OKTA_ORG_URL=$(OKTA_ORG_URL)  --from-literal=PGHOST=$(PGHOST) --from-literal=PGUSERNAME=$(PGUSERNAME) --from-literal=PGDATABASE=$(PGDATABASE) --from-literal=PGPASSWORD=$(PGPASSWORD)  --from-literal=PGPORT=$(PGPORT)'
+          - task: KubernetesManifest@0
+            displayName: 'Create secret for Database'
+            inputs:
+              action: 'createSecret'
+              kubernetesServiceConnection: '$(k8s_conn)'
+              secretType: 'generic'
+              secretName: 'db-secret.yml'
+              secretArguments: '--from-literal=PGUSERNAME=$(PGUSERNAME) --from-literal=POSTGRES_PASSWORD=$(PGPASSWORD)'
+
+          - task: KubernetesManifest@0
+            displayName: 'Deploy manifests ymls'
+            inputs:
+              action: 'deploy'
+              manifests: |
+                $(Pipeline.Workspace)/k8s/service.yml
+                $(Pipeline.Workspace)/k8s/ingress.yml
+                $(Pipeline.Workspace)/k8s/database.yml
+                $(Pipeline.Workspace)/k8s/deployment.yml
+              containers: 'containerregistry555.azurecr.io/weighttrackerapp:$(Build.BuildId)'
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Kubernetes Service Connection'
+              kubernetesServiceEndpoint: '$(k8s_conn)'
+              command: 'apply'
+              useConfigurationFile: true
+              configuration: 'k8s/database.yml'
+              secretType: 'generic'            
+              secretName: 'db-secret.yml'
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Kubernetes Service Connection'
+              kubernetesServiceEndpoint: '$(k8s_conn)'
+              command: 'apply'
+              useConfigurationFile: true
+              configuration: 'k8s/deployment.yml'
+              secretType: 'generic'            
+              secretName: 'secret.yml'
