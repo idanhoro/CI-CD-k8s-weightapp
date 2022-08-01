@@ -10,7 +10,7 @@ resources:
 variables:
   k8s_conn: 'kubernetes-staging-connection'
 
-# Continuous Integration Process..
+# Continuous Integration Process.
 stages:
 - stage: Build
   displayName: Install Docker-Build and push stage
