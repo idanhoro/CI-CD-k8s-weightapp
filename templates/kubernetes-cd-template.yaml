@@ -35,6 +35,9 @@
               configuration: 'k8s/database.yml'
               secretType: 'generic'            
               secretName: 'db-secret.yml'
+          - task: CmdLine@2
+            inputs:
+              script: 'sleep 20'         
           - task: Kubernetes@1
             inputs:
               connectionType: 'Kubernetes Service Connection'
