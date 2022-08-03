@@ -24,6 +24,12 @@ stages:
         repository: 'WeightTrackerApp'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+    - script: |
+        helm chart save $(build.sourcesdirectory)/helm_charts/ containerregistry555.azurecr.io/weighttrackerapp:latest
+      displayName: save the chart and set the alias
+    - script: |
+        helm chart push containerregistry555.azurecr.io/weighttrackerapp:latest
+      displayName: push the chart to acr
 
     - upload: k8s
       artifact: k8s
@@ -40,24 +46,6 @@ stages:
     environment: 'staging.default'
     variables:
       - group: "Staging-variables"
-    strategy:
-      runOnce:
-        deploy:
-         steps:
-           - template: templates/kubernetes-cd-template.yaml
-
-
-- stage: DeployToProduction
-  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-  displayName: Deploy production stage
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy to production
-    pool:
-      name: "CI-agents"
-    environment: 'production.default'
-    variables:
-      - group: "Production-variables"
     strategy:
       runOnce:
         deploy:
