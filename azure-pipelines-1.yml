@@ -33,7 +33,7 @@ stages:
         azureContainerRegistry: 'containerregistry555.azurecr.io'      
         azureResourceGroupForACR: 'NodeWeightTracker-AKS'
         command: 'package'
-        chartVersion: $(Build.BuildId)
+        chartVersion: 'weight-app-$(Build.BuildId)'
         chartPath: '**/charts/app-chart'
         destination: '/home/ubuntu/charts/app-chart'
     
