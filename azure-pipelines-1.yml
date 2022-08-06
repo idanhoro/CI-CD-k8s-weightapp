@@ -76,4 +76,4 @@ stages:
               command: 'upgrade'
               chartType: 'FilePath'
               chartPath: '/home/ubuntu/charts/weightApp-$(Build.BuildId).tgz'
-              releaseName: kaka-01
+              releaseName: weightApp-01
