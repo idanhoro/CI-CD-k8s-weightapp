@@ -33,8 +33,8 @@ stages:
         chartPath: 'charts/app-chart'
         chartVersion: '$(Build.BuildId)'
 
-    - upload: charts
-      artifact: charts
+    - upload: charts/app-chart
+      artifact: charts/app-chart
     
   
 - stage: DeployToStaging
