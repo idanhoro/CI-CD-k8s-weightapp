@@ -26,6 +26,7 @@ stages:
         Dockerfile: '**/Dockerfile'
     - task: HelmDeploy@0
       inputs:
+        azureSubscriptionForACR: 'Azure Pass - Sponsorship'
         azureContainerRegistry: 'docker-registry'      
         azureResourceGroupForACR: 'NodeWeightTracker-AKS'
         command: 'package'
@@ -67,6 +68,7 @@ stages:
               installKubectl: true
           - task: HelmDeploy@0
             inputs:
+              azureSubscriptionForACR: 'Azure Pass - Sponsorship'
               azureContainerRegistry: 'docker-registry'      
               azureResourceGroupForACR: 'NodeWeightTracker-AKS'
               connectionType: 'Kubernetes Service Connection'
