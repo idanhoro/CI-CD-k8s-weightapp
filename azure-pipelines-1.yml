@@ -75,6 +75,4 @@ stages:
               command: 'upgrade'
               chartType: 'FilePath'
               chartPath: '/home/ubuntu/charts/weightApp-$(Build.BuildId).tgz'
-              releaseName: 'weightApp'
-              install: true
-              overrideValues: image.tag=$(Build.BuildID),releasename='weightApp'
+              arguments: '--set releasename=weightApp'
