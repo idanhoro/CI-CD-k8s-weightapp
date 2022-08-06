@@ -77,4 +77,4 @@ stages:
               chartPath: '/home/ubuntu/charts/weightApp-$(Build.BuildId).tgz'
               releaseName: 'weightApp'
               install: true
-              overrideValues: 'weightApp'
+              overrideValues: releasename='weightApp'
