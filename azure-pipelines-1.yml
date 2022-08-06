@@ -75,4 +75,5 @@ stages:
               command: 'upgrade'
               chartType: 'FilePath'
               chartPath: '/home/ubuntu/charts/weightApp-$(Build.BuildId).tgz'
-              releaseName: 'my-release'
+              releaseName: 'weightApp'
+              install: true
