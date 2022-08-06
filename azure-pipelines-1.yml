@@ -34,7 +34,7 @@ stages:
         azureResourceGroupForACR: 'NodeWeightTracker-AKS'
         command: 'package'
         chartPath: '**/charts/app-chart'
-        destination: 'kaka'
+        destination: '/home/ubuntu/charts/app-chart'
     
   
 - stage: DeployToStaging
@@ -74,5 +74,5 @@ stages:
               kubernetesServiceConnection: 'staging-WeightTracker-default-1659481280965'
               command: 'upgrade'
               chartType: 'FilePath'
-              chartPath: 'containerregistry555.azurecr.io/weightApp'
+              chartPath: '/home/ubuntu/charts/app-chart'
               releaseName: 'my-release'
