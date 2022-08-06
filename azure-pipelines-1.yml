@@ -34,7 +34,7 @@ stages:
         azureResourceGroupForACR: 'NodeWeightTracker-AKS'
         command: 'package'
         chartPath: '**/charts/app-chart'
-        destination: 'containerregistry555.azurecr.io/kaka'
+        destination: 'kaka'
     
   
 - stage: DeployToStaging
