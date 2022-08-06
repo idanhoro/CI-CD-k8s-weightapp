@@ -35,9 +35,7 @@ stages:
         command: 'package'
         chartVersion: '$(Build.BuildId)'
         chartPath: '**/charts/app-chart'
-        destination: '/home/ubuntu/charts/app-chart'
-        releaseName: 'weightApp'
-    
+        destination: '/home/ubuntu/charts'    
   
 - stage: DeployToStaging
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
@@ -76,4 +74,5 @@ stages:
               kubernetesServiceConnection: 'staging-WeightTracker-default-1659481280965'
               command: 'upgrade'
               chartType: 'FilePath'
-              chartPath: '/home/ubuntu/charts/app-chart/chart-'
+              chartPath: '/home/ubuntu/charts/app-chart/weightApp-$(Build.BuildId).tgz'
+              releaseName: 'weightApp-chart'
