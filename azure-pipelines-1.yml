@@ -33,6 +33,7 @@ stages:
         azureContainerRegistry: 'containerregistry555.azurecr.io'      
         azureResourceGroupForACR: 'NodeWeightTracker-AKS'
         command: 'package'
+        chartVersion: $(Build.BuildId)
         chartPath: '**/charts/app-chart'
         destination: '/home/ubuntu/charts/app-chart'
     
@@ -74,5 +75,5 @@ stages:
               kubernetesServiceConnection: 'staging-WeightTracker-default-1659481280965'
               command: 'upgrade'
               chartType: 'FilePath'
-              chartPath: '/home/ubuntu/charts/app-chart'
+              chartPath: '/home/ubuntu/charts/app-chart/chart-'
               releaseName: 'my-release'
