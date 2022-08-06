@@ -76,4 +76,3 @@ stages:
               chartPath: '$(Build.ArtifactStagingDirectory)'
               chartVersion: '$(build.BuildId)'
               releaseName: 'my-release'
-              valueFile: 'secret.yml'
