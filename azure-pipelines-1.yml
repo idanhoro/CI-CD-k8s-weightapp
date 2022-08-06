@@ -36,7 +36,6 @@ stages:
         chartVersion: '$(Build.BuildId)'
         chartPath: '**/charts/app-chart'
         destination: '/home/ubuntu/charts'
-        releaseName: 'weightApp'   
   
 - stage: DeployToStaging
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
@@ -76,5 +75,5 @@ stages:
               command: 'upgrade'
               chartType: 'FilePath'
               chartPath: '/home/ubuntu/charts/weightApp-$(Build.BuildId).tgz'
-              releaseName: 'weightApp'
+              releaseName: 'my-weightApp'
               install: true
