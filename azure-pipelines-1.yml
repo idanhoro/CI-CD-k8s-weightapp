@@ -28,9 +28,8 @@ stages:
       inputs:
         azureContainerRegistry: 'docker-registry'      
         azureResourceGroupForACR: 'NodeWeightTracker-AKS'
-        azureSubscriptionForACR: 'e66e6811-d470-408b-910d-b100ca295f46'
         command: 'package'
-        chartPath: 'k8s'
+        chartPath: 'charts/app-chart'
         chartVersion: '$(Build.BuildId)'
 
     - upload: k8s
