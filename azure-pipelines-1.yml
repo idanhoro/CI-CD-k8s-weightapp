@@ -35,7 +35,8 @@ stages:
         command: 'package'
         chartVersion: '$(Build.BuildId)'
         chartPath: '**/charts/app-chart'
-        destination: '/home/ubuntu/charts'    
+        destination: '/home/ubuntu/charts'
+        releaseName: 'weightApp'   
   
 - stage: DeployToStaging
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
