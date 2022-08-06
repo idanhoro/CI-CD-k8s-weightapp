@@ -74,5 +74,7 @@ stages:
               kubernetesServiceConnection: 'staging-WeightTracker-default-1659481280965'
               command: 'upgrade'
               chartType: 'FilePath'
-              chartPath: '/home/ubuntu/charts/weightApp-$(Build.BuildId).tgz weightApp'
+              chartPath: '/home/ubuntu/charts/weightApp-$(Build.BuildId).tgz'
+              releaseName: 'weightApp'
               install: true
+              overrideValues: releaseName=weightApp
