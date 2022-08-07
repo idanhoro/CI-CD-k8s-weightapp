@@ -54,6 +54,7 @@ stages:
          steps:
           - bash: |
               export PASS=$(kubectl get secret --namespace default my-postgresql1 -o jsonpath="{.data.postgres-password}" | base64 -d)
+              echo $PASS              
               echo "##vso[task.setvariable variable=PGPASSWORD;]$(PASS)"
               
           - task: KubernetesManifest@0
