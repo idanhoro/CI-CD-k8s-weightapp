@@ -11,7 +11,7 @@
               command: 'upgrade'
               chartType: 'Name'
               chartName: 'charts/postgresql-chart/postgresql'
-              releaseName: 'my-postgresql1'
+              releaseName: 'my-postgresql2'
 
           - bash: |
               sleep 20
