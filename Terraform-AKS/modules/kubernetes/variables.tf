@@ -17,7 +17,7 @@ variable "container_registry_name" {
   description = "Container registry name, unique"
 }
 
-variable "node_amount" {
+variable "nodes_amount" {
     type = number
     description = "Amount of nodes"
 }

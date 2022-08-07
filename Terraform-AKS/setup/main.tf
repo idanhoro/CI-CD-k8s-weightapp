@@ -14,7 +14,7 @@ resource "azurerm_container_registry" "container_registry" {
 
 # Create Kubernetes cluster Staging environment.
 module "k8s_staging" {
-  source = "../Terraform-AKS/modules/kubernetes"
+  source = "../modules/kubernetes"
   resource_group_location=var.resource_group_location
   kubernetes_cluster_name=var.staging_kubernetes_cluster_name
   container_registry_name=var.container_registry_name
@@ -25,11 +25,11 @@ module "k8s_staging" {
 
 # Create Kubernetes cluster Production environment
 module "k8s_production" {
-  source = "../Terraform-AKS/modules/kubernetes"
-  resource_group_location=var.resource_group_location
+  source = "../modules/kubernetes"
+  resource_group_location=var.location_zone2
   kubernetes_cluster_name=var.production_kubernetes_cluster_name
   container_registry_name=var.container_registry_name
   resource_group_name=azurerm_resource_group.kubernetes.name
-  node_amount=var.production_node_amount
+  nodes_amount=var.production_nodes_amount
   scope=azurerm_container_registry.container_registry.id
 }

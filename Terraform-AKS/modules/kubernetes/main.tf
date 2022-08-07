@@ -28,5 +28,5 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
 resource "azurerm_role_assignment" "azurerm_role_assignment" {
   scope                = var.scope
   role_definition_name = "AcrPull"
-  principal_id         = azurerm_kubernetes_cluster.k8s.kubelet_identity[0].object_id
+  principal_id         = azurerm_kubernetes_cluster.kubernetes.kubelet_identity[0].object_id
 }
