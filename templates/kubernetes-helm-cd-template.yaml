@@ -1,3 +1,4 @@
+         steps:
           - task: HelmInstaller@0
             inputs:
               helmVersion: '3.0.0'
