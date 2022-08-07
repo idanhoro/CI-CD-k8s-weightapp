@@ -63,60 +63,6 @@ PORT=''
 AZLOGIN=''
 ```
 
-# K8s deploy 
-<img src="./images/k8s.gif" width="100"/>
-
-Deployment using k8s.
-
-`azure-pipelines.yml` is pipeline that following those steps:
-
-#### CI
-
-* Build and push image to Azure Container Registry
-* Upload `k8s` directory
-
-Yaml files to create resources is stored at `k8s` directory.
-
-#### CD
-
-`azure-pipelines.yml` is pipeline that deploy using  `kubernetes-cd-template.yaml` follow those steps:
-
-* Create secret file for application
-* Create secret file for Database
-* Deploy database to the cluster
-* Wait for database 25 seconds to be fully deployed.
-* Deploy service and ingress to the cluster
-* Wait for service and ingress 5 seconds to be fully deployed
-* Deploy the application the to the cluster
-
-# K8s deploy with Helm
-
-<img src="./images/k8s_helm.png" width="300"/>
-
-Deployment using k8s and Helm.
-
-`azure-pipelines-1.yml` is pipeline that following those steps:
-
-#### CI
-
-* Build and push image to Azure Container Registry
-* Install Helm on agent.
-* Package `charts` directory.
-
-Yaml files to create resources is stored at `charts` directory.
-
-#### CD
-
-* Install Helm on the pods.
-* Helm deploy using `upgrade` command with `postgresql-chart`.
-* Login to the cluster.
-* Export postgresql database password and insert as run time variable.
-* Create secret file.
-* Helm deploy using `upgrade` command with `weight-app` chart we created at the CI.
-
-
-
-
 # Node.js Weight Tracker
 
 ![Demo](docs/build-weight-tracker-app-demo.gif)
