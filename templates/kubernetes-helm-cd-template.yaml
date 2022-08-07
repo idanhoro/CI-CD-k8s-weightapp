@@ -15,7 +15,7 @@
 
           - bash: |
               sleep 20
-              $cluster_login
+              $CLUSTER_LOGIN
               export PASS=$(kubectl get secret --namespace default my-postgresql1 -o jsonpath="{.data.postgres-password}" | base64 -d)             
               echo "##vso[task.setvariable variable=STAGING_PGPASS;]$PASS"
 
