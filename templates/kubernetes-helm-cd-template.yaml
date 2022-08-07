@@ -1,38 +1,38 @@
-          - task: HelmInstaller@0
-            inputs:
-              helmVersion: '3.0.0'
-              installKubectl: true
+           - task: HelmInstaller@0
+             inputs:
+               helmVersion: '3.0.0'
+               installKubectl: true
 
-          - task: HelmDeploy@0
-            inputs:
-              connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceConnection: '$(k8s_conn)'
-              command: 'upgrade'
-              chartType: 'Name'
-              chartName: 'charts/postgresql-chart/postgresql'
-              releaseName: 'my-postgresql1'
+           - task: HelmDeploy@0
+             inputs:
+               connectionType: 'Kubernetes Service Connection'
+               kubernetesServiceConnection: '$(k8s_conn)'
+               command: 'upgrade'
+               chartType: 'Name'
+               chartName: 'charts/postgresql-chart/postgresql'
+               releaseName: 'my-postgresql1'
 
-          - bash: |
-              sleep 20
-              $AZLOGIN
-              export PASS=$(kubectl get secret --namespace default my-postgresql1 -o jsonpath="{.data.postgres-password}" | base64 -d)             
-              echo "##vso[task.setvariable variable=STAGING_PGPASS;]$PASS"
+           - bash: |
+               sleep 20
+               $AZLOGIN
+               export PASS=$(kubectl get secret --namespace default my-postgresql1 -o jsonpath="{.data.postgres-password}" | base64 -d)             
+               echo "##vso[task.setvariable variable=STAGING_PGPASS;]$PASS"
 
-          - task: KubernetesManifest@0
-            displayName: Create imagePullSecret
-            inputs:
-              action: 'createSecret'
-              kubernetesServiceConnection: $(k8s_conn)
-              secretType: 'generic'
-              secretName: 'secret.yml'
-              secretArguments: '--from-literal=COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) --from-literal=HOST=$(HOST) --from-literal=PORT=$(PORT) --from-literal=NODE_ENV=$(NODE_ENV) --from-literal=HOST_URL=$(HOST_URL) --from-literal=OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) --from-literal=OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) --from-literal=OKTA_ORG_URL=$(OKTA_ORG_URL)  --from-literal=PGHOST=$(PGHOST) --from-literal=PGUSERNAME=$(PGUSERNAME) --from-literal=PGDATABASE=$(PGDATABASE) --from-literal=PGPASSWORD=$(PGPASSWORD)  --from-literal=PGPORT=$(PGPORT)'
+           - task: KubernetesManifest@0
+             displayName: Create imagePullSecret
+             inputs:
+               action: 'createSecret'
+               kubernetesServiceConnection: $(k8s_conn)
+               secretType: 'generic'
+               secretName: 'secret.yml'
+               secretArguments: '--from-literal=COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) --from-literal=HOST=$(HOST) --from-literal=PORT=$(PORT) --from-literal=NODE_ENV=$(NODE_ENV) --from-literal=HOST_URL=$(HOST_URL) --from-literal=OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) --from-literal=OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) --from-literal=OKTA_ORG_URL=$(OKTA_ORG_URL)  --from-literal=PGHOST=$(PGHOST) --from-literal=PGUSERNAME=$(PGUSERNAME) --from-literal=PGDATABASE=$(PGDATABASE) --from-literal=PGPASSWORD=$(PGPASSWORD)  --from-literal=PGPORT=$(PGPORT)'
           
-          - task: HelmDeploy@0
-            inputs:
-              connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceConnection: $(k8s_conn)
-              command: 'upgrade'
-              chartType: 'FilePath'
-              chartPath: '/home/ubuntu/charts/weightApp-$(Build.BuildId).tgz'
-              overrideValues: 'app.version=$(Build.BuildId)'
-              releaseName: weight-app
+           - task: HelmDeploy@0
+             inputs:
+               connectionType: 'Kubernetes Service Connection'
+               kubernetesServiceConnection: $(k8s_conn)
+               command: 'upgrade'
+               chartType: 'FilePath'
+               chartPath: '/home/ubuntu/charts/weightApp-$(Build.BuildId).tgz'
+               overrideValues: 'app.version=$(Build.BuildId)'
+               releaseName: weight-app
