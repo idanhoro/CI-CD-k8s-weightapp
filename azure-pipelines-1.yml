@@ -1,4 +1,4 @@
-name: BootcampDockerCICD
+name: Bootcamp-Weight-app-k8s-helm
 
 trigger:
 - master
