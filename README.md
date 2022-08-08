@@ -43,6 +43,8 @@ Finally we will, update or CI/CD process to deploy our already dockerized applic
 ## Running instructions
 
 1. Create two environments using terraform aks module at directory `Terraform-AKS`
+2. Install Ngnix ingress controller using the following command:
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.4/deploy/static/provider/cloud/deploy.yaml`
 2. Import this repo to azure devops reops
 3. Create variable group for each environment including the following variables:
 ```yaml
@@ -62,6 +64,7 @@ PGUSERNAME=''
 PORT=''
 AZLOGIN=''
 ```
+
 
 # Node.js Weight Tracker
 
