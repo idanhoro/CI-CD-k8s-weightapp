@@ -1,5 +1,5 @@
 # K8s deploy 
-<img src="./images/k8s.gif" width="100"/>
+<img src="../images/k8s.gif" width="100"/>
 
 Deployment using k8s.
 

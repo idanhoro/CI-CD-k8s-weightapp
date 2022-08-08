@@ -1,6 +1,6 @@
 # K8s deploy with Helm
 
-<img src="./images/k8s_helm.png" width="300"/>
+<img src="../images/k8s_helm.png" width="300"/>
 
 Deployment using k8s and Helm.
 
