@@ -5,6 +5,10 @@
 # Introduction
 Deploy WeightTracker App using Azure Kubernetes Cluster,
 Plus deployment with helm option.
+
+<img src="./images/docker-envs2.png" width="400"/> 
+
+
 # Project Overview
 First of all we will create a Kubernetes Cluster in Microsoft’s Azure Kubernetes Service (AKS) for the project infrastructure.
 
