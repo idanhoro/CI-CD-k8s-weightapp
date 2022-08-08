@@ -6,7 +6,7 @@
 Deploy WeightTracker App using Azure Kubernetes Cluster,
 Plus deployment with helm option.
 
-<img src="./images/docker-envs2.png" width="400"/> 
+<img src="./images/docker-envs2.png" width="700"/> 
 
 
 # Project Overview
