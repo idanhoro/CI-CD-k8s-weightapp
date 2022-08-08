@@ -68,8 +68,8 @@ PGUSERNAME=''
 PORT=''
 AZLOGIN=''
 ```
-4. Follow instructions for k8s+Helm deploy at `charts` directory.
-5. Follow instructions for k8s deploy at `k8s` directory.
+4. Follow instructions for k8s+Helm deploy at `charts` directory -> [charts directory](https://github.com/idanhoro/CI-CD-k8s-weightapp/tree/master/charts).
+5. Follow instructions for k8s deploy at `k8s` directory -> [k8s directory](https://github.com/idanhoro/CI-CD-k8s-weightapp/tree/master/k8s).
 
 # Node.js Weight Tracker
 
