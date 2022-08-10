@@ -46,27 +46,27 @@ Finally we will, update or CI/CD process to deploy our already dockerized applic
 
 ## Running instructions
 
-1. Create two environments using terraform aks module at directory `Terraform-AKS`
+1. Create two environments using terraform aks module at [Terraform-AKS directory](https://github.com/idanhoro/CI-CD-k8s-weightapp/tree/master/Terraform-AKS)
 2. Install Ngnix ingress controller using the following command:
 `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.4/deploy/static/provider/cloud/deploy.yaml`
-2. Import this repo to azure devops reops
+2. Link the repository to the pipeline (Azure DevOps Pipeline for example).
 3. Create variable group for each environment including the following variables:
 ```yaml
 HOST=''
 HOST_URL=''
-k8s_conn=''
-NODE_ENV=''
+k8s_conn='Your k8s connection name'
+NODE_ENV='development'
 OKTA_CLIENT_ID=''
 OKTA_CLIENT_SECRET=''
 OKTA_ORG_URL=''
 COOKIE_ENCRYPT_PWD=''
-PGDATABASE=''
-PGHOST=''
-PGPASSWORD=''
-PGPORT=''
-PGUSERNAME=''
-PORT=''
-AZLOGIN=''
+PGDATABASE='postgres'
+PGHOST='my-postgresql3'/'Your PGHOST ip/name'
+PGPASSWORD='Your password'
+PGPORT='5432'
+PGUSERNAME='postgres'
+PORT='8080'
+AZLOGIN='Your cluster connection command'
 ```
 4. Follow instructions for k8s+Helm deploy at `charts` directory -> [charts directory](https://github.com/idanhoro/CI-CD-k8s-weightapp/tree/master/charts).
 5. Follow instructions for k8s deploy at `k8s` directory -> [k8s directory](https://github.com/idanhoro/CI-CD-k8s-weightapp/tree/master/k8s).
