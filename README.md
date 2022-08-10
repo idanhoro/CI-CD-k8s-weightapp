@@ -66,7 +66,7 @@ PGPASSWORD='Your password'
 PGPORT='5432'
 PGUSERNAME='postgres'
 PORT='8080'
-AZLOGIN='Your cluster connection command'
+CLUSTER_LOGIN='Your cluster connection command'
 ```
 4. Follow instructions for k8s+Helm deploy at `charts` directory -> [charts directory](https://github.com/idanhoro/CI-CD-k8s-weightapp/tree/master/charts).
 5. Follow instructions for k8s deploy at `k8s` directory -> [k8s directory](https://github.com/idanhoro/CI-CD-k8s-weightapp/tree/master/k8s).
